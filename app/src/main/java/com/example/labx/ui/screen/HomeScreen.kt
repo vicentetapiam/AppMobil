@@ -32,6 +32,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import android.util.Log
+import androidx.compose.foundation.background
+import androidx.compose.ui.graphics.Color
 import com.example.labx.data.repository.CarritoRepository
 import com.example.labx.data.repository.ProductoRepositoryImpl
 import com.example.labx.domain.model.Producto
@@ -97,6 +99,12 @@ fun HomeScreen(
         topBar = {
             TopAppBar(
                 title = { Text("Productos Disponibles") },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color(0xFF1A1A2E), // azul
+                    titleContentColor = Color.White,    // color del título
+                    navigationIconContentColor = Color.White, // íconos de navegación
+                    actionIconContentColor = Color(0xFF39FF14)   // íconos de acción
+                ),
                 navigationIcon = {
                     IconButton(onClick = onVolverPortada) {
                         Icon(
@@ -129,6 +137,7 @@ fun HomeScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .background(Color(0xFF0F0F1A))
         ) {
             when {
                 // Estado: Cargando
@@ -170,14 +179,21 @@ fun HomeScreen(
                         OutlinedTextField(
                             value = textoBusqueda,
                             onValueChange = { textoBusqueda = it },
+
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp, vertical = 8.dp),
-                            placeholder = { Text("Buscar productos...") },
+                            placeholder = {
+                                Text(
+                                    text = "Buscar productos...",
+                                    color = Color.White // 👈 aquí defines el color del placeholder
+                                )
+                            },
                             leadingIcon = {
                                 Icon(
                                     imageVector = Icons.Default.Search,
-                                    contentDescription = "Buscar"
+                                    contentDescription = "Buscar",
+                                    tint = Color.White
                                 )
                             },
                             trailingIcon = {
@@ -185,7 +201,8 @@ fun HomeScreen(
                                     IconButton(onClick = { textoBusqueda = "" }) {
                                         Icon(
                                             imageVector = Icons.Default.Clear,
-                                            contentDescription = "Limpiar"
+                                            contentDescription = "Limpiar",
+                                            tint = Color.White
                                         )
                                     }
                                 }
@@ -206,9 +223,15 @@ fun HomeScreen(
                                 FilterChip(
                                     selected = categoriaSeleccionada == null,
                                     onClick = { categoriaSeleccionada = null },
-                                    label = { Text("Todos") }
+                                    label = { Text("Todos") },
+                                    colors = FilterChipDefaults.filterChipColors(
+                                        containerColor = Color(0xFF340D48),          // fondo cuando NO está seleccionado
+                                        selectedContainerColor = Color(0xFF39FF14),     // fondo cuando está seleccionado
+                                        labelColor = Color.White,                 // texto cuando NO está seleccionado
+                                        selectedLabelColor = Color(0xFF340D48)          // texto cuando está seleccionado
+                                    )
                                 )
-                                
+
                                 // Chip por cada categoría
                                 categorias.forEach { categoria ->
                                     FilterChip(
@@ -220,7 +243,13 @@ fun HomeScreen(
                                                 categoria
                                             }
                                         },
-                                        label = { Text(categoria) }
+                                        label = { Text(categoria) },
+                                        colors = FilterChipDefaults.filterChipColors(
+                                            containerColor = Color(0xFF340D48),          // fondo cuando NO está seleccionado
+                                            selectedContainerColor = Color(0xFF39FF14),     // fondo cuando está seleccionado
+                                            labelColor = Color.White,                 // texto cuando NO está seleccionado
+                                            selectedLabelColor = Color(0xFF340D48)
+                                        )
                                     )
                                 }
                             }
@@ -232,7 +261,7 @@ fun HomeScreen(
                                 text = "${productosFiltrados.size} resultado(s)",
                                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
                                 fontSize = 14.sp,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                                color = Color.White
                             )
                         }
 
@@ -268,7 +297,13 @@ fun ProductoCard(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xFF1A1A2E), // azul claro
+            contentColor = Color.White         // color del texto dentro
+        )
+
+
     ) {
         Row(
             modifier = Modifier
@@ -315,14 +350,14 @@ fun ProductoCard(
                 )
                 Text(
                     text = producto.categoria,
-                    fontSize = 12.sp,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    fontSize = 15.sp,
+                    color = Color(0xFFFFFFFF)
                 )
                 Text(
                     text = producto.precioFormateado(),
-                    fontSize = 15.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.primary
+                    color = Color(0xFF39FF14)
                 )
             }
             
@@ -334,13 +369,13 @@ fun ProductoCard(
                 if (producto.hayStock) {
                     Text(
                         text = "Stock: ${producto.stock}",
-                        fontSize = 11.sp,
-                        color = MaterialTheme.colorScheme.secondary
+                        fontSize = 15.sp,
+                        color = Color(0xFFC9C9C9)
                     )
                 } else {
                     Text(
                         text = "Sin stock",
-                        fontSize = 11.sp,
+                        fontSize = 15.sp,
                         color = MaterialTheme.colorScheme.error
                     )
                 }

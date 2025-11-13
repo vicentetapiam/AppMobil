@@ -57,7 +57,7 @@ fun PortadaScreen(
                 text = "Level-Up",
                 fontSize = 36.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFFFFFFFF)
+                color = Color(0xFF39FF14)
             )
             
             Spacer(modifier = Modifier.height(8.dp))
@@ -108,7 +108,7 @@ fun PortadaScreen(
                     .fillMaxWidth()
                     .height(56.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF6F079C)
+                    containerColor = Color(0xFF5A067E)
                 )
             ) {
                 Text(
@@ -127,7 +127,7 @@ fun PortadaScreen(
                     .fillMaxWidth()
                     .height(56.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF6F079C)
+                    containerColor = Color(0xFF340D48)
                 )
 
             ) {
