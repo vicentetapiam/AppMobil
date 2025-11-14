@@ -9,6 +9,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -48,6 +49,12 @@ fun RegistroScreen(
         topBar = {
             TopAppBar(
                 title = { Text("Registro de Usuario") },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color(0xFF1A1A2E), // azul
+                    titleContentColor = Color.White,    // color del título
+                    navigationIconContentColor = Color.White, // íconos de navegación
+                    actionIconContentColor = Color(0xFF39FF14)   // íconos de acción
+                ),
                 navigationIcon = {
                     IconButton(onClick = onVolverClick) {
                         Icon(

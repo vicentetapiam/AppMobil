@@ -1,5 +1,6 @@
 package com.example.labx.ui.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -59,6 +61,12 @@ fun DetalleProductoScreen(
         topBar = {
             TopAppBar(
                 title = { Text("Detalle del Producto") },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color(0xFF1A1A2E), // azul
+                    titleContentColor = Color.White,    // color del título
+                    navigationIconContentColor = Color.White, // íconos de navegación
+                    actionIconContentColor = Color(0xFF39FF14)   // íconos de acción
+                ),
                 navigationIcon = {
                     IconButton(onClick = onVolverClick) {
                         Icon(
@@ -74,6 +82,7 @@ fun DetalleProductoScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .background(Color(0xFF0F0F1A))
         ) {
             when {
                 // Estado: Cargando
@@ -125,14 +134,15 @@ fun DetalleProductoScreen(
                         Text(
                             text = producto!!.nombre,
                             fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
                         )
                         
                         // Categoría
                         Text(
                             text = "Categoría: ${producto!!.categoria}",
                             fontSize = 16.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            color = Color.White
                         )
                         
                         Divider()
@@ -141,11 +151,13 @@ fun DetalleProductoScreen(
                         Text(
                             text = "Descripción",
                             fontSize = 18.sp,
-                            fontWeight = FontWeight.SemiBold
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color.White
                         )
                         Text(
                             text = producto!!.descripcion,
-                            fontSize = 16.sp
+                            fontSize = 16.sp,
+                            color = Color.White
                         )
                         
                         Divider()
@@ -158,7 +170,8 @@ fun DetalleProductoScreen(
                             Text(
                                 text = "Precio:",
                                 fontSize = 18.sp,
-                                fontWeight = FontWeight.SemiBold
+                                fontWeight = FontWeight.SemiBold,
+                                color = Color.White
                             )
                             Text(
                                 text = producto!!.precioFormateado(),
@@ -175,13 +188,14 @@ fun DetalleProductoScreen(
                         ) {
                             Text(
                                 text = "Stock disponible:",
-                                fontSize = 16.sp
+                                fontSize = 16.sp,
+                                color = Color.White
                             )
                             Text(
                                 text = "${producto!!.stock} unidades",
                                 fontSize = 16.sp,
                                 color = if (producto!!.hayStock) {
-                                    MaterialTheme.colorScheme.secondary
+                                    Color.White
                                 } else {
                                     MaterialTheme.colorScheme.error
                                 }
@@ -201,16 +215,24 @@ fun DetalleProductoScreen(
                                 }
                             },
                             modifier = Modifier.fillMaxWidth(),
-                            enabled = producto!!.hayStock
+                            enabled = producto!!.hayStock,
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color(0xFF39FF14)
+                            )
                         ) {
-                            Text("Agregar al Carrito")
+                            Text(
+                                text = "Agregar al Carrito",
+                                color = Color(0xFF340D48),
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight.Bold
+                            )
                         }
                         
                         // Mensaje de confirmación
                         if (mostrarMensaje) {
                             Text(
                                 text = "✓ Producto agregado al carrito",
-                                color = MaterialTheme.colorScheme.primary,
+                                color = Color(0xFF39FF14),
                                 modifier = Modifier.align(Alignment.CenterHorizontally)
                             )
                             LaunchedEffect(Unit) {

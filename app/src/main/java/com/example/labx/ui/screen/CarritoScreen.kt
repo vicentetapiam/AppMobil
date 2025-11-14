@@ -1,5 +1,6 @@
 package com.example.labx.ui.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.widthIn
@@ -56,6 +57,12 @@ fun CarritoScreen(
         topBar = {
             TopAppBar(
                 title = { Text("Mi Carrito (${itemsCarrito.size})") },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color(0xFF1A1A2E), // azul
+                    titleContentColor = Color.White,    // color del título
+                    navigationIconContentColor = Color.White, // íconos de navegación
+                    actionIconContentColor = Color(0xFF39FF14)   // íconos de acción
+                ),
                 navigationIcon = {
                     IconButton(onClick = onVolverClick) {
                         Icon(
@@ -88,7 +95,7 @@ fun CarritoScreen(
             // Barra de total
             if (itemsCarrito.isNotEmpty()) {
                 Surface(
-                    color = MaterialTheme.colorScheme.primaryContainer,
+                    color = Color(0xFF1A1A2E),
                     shadowElevation = 8.dp
                 ) {
                     Row(
@@ -101,13 +108,15 @@ fun CarritoScreen(
                         Text(
                             text = "TOTAL:",
                             fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+
                         )
                         Text(
                             text = formatearPrecio(total),
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.primary
+                            color = Color(0xFF39FF14)
                         )
                     }
                 }
@@ -118,6 +127,7 @@ fun CarritoScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .background(Color(0xFF0F0F1A))
         ) {
             if (itemsCarrito.isEmpty()) {
                 // Carrito vacío
@@ -132,7 +142,8 @@ fun CarritoScreen(
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
                         text = "Tu carrito está vacío",
-                        fontSize = 18.sp
+                        fontSize = 18.sp,
+                        color = Color.White
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Button(onClick = onVolverClick) {
@@ -191,7 +202,11 @@ fun CarritoItemCard(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xFF1A1A2E), // azul claro
+            contentColor = Color.White         // color del texto dentro
+        )
     ) {
         Row(
             modifier = Modifier
@@ -229,14 +244,15 @@ fun CarritoItemCard(
                 Text(
                     text = item.producto.nombre,
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.White
                 )
                 
                 // Precio unitario
                 Text(
                     text = "Precio: ${formatearPrecio(item.producto.precio)}",
                     fontSize = 14.sp,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = Color.White
                 )
                 
                 // Controles de cantidad
@@ -258,7 +274,7 @@ fun CarritoItemCard(
                             imageVector = Icons.Default.Delete,
                             contentDescription = "Disminuir",
                             tint = if (item.cantidad > 1) 
-                                MaterialTheme.colorScheme.primary 
+                                Color.White
                             else 
                                 MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
                         )
@@ -271,7 +287,8 @@ fun CarritoItemCard(
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier
                             .widthIn(min = 30.dp)
-                            .wrapContentWidth(Alignment.CenterHorizontally)
+                            .wrapContentWidth(Alignment.CenterHorizontally),
+                        color = Color.White
                     )
                     
                     // Botón Más (+)
@@ -282,7 +299,7 @@ fun CarritoItemCard(
                         Icon(
                             imageVector = Icons.Default.Add,
                             contentDescription = "Aumentar",
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = Color.White
                         )
                     }
                 }
@@ -292,7 +309,7 @@ fun CarritoItemCard(
                     text = "Subtotal: ${formatearPrecio(item.subtotal)}",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary
+                    color = Color(0xFF39FF14)
                 )
             }
             
@@ -313,5 +330,5 @@ fun CarritoItemCard(
  */
 fun formatearPrecio(precio: Double): String {
     val precioEntero = precio.toInt()
-    return "$$${precioEntero.toString().reversed().chunked(3).joinToString(".").reversed()}"
+    return "$${precioEntero.toString().reversed().chunked(3).joinToString(".").reversed()}"
 }

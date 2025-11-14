@@ -1,5 +1,6 @@
 package com.example.labx.ui.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -154,6 +155,7 @@ fun LoginAdminScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp)
+
             ) {
                 Text(
                     text = "INICIAR SESIÓN",

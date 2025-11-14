@@ -1,5 +1,6 @@
 package com.example.labx.ui.screen
-
+import com.example.labx.R
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
@@ -10,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -43,11 +45,10 @@ fun PortadaScreen(
             verticalArrangement = Arrangement.Center
         ) {
             // Icono grande de tienda
-            Icon(
-                imageVector = Icons.Default.ShoppingCart,
-                contentDescription = "Logo",
-                modifier = Modifier.size(120.dp),
-                tint = Color(0xFF39FF14)
+            Image(
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = "Logo de la Empresa",
+                modifier = Modifier.size(200.dp) // Define un tamaño de 48x48 dp para el logo
             )
             
             Spacer(modifier = Modifier.height(24.dp))
